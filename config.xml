@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<image schemaversion="6.2" name="SBT-Leap-42.1">
+    <description type="system">
+        <author>Zen Chibiko</author>
+        <contact>sbt.asonov@sberbank.ru</contact>
+        <specification>Leap 42.1 image</specification>
+    </description>
+    <preferences>
+        <type image="iso" primary="true" boot="isoboot/suse-leap42.1" flags="overlay" hybrid="true" firmware="efi" kernelcmdline="splash" hybridpersistent_filesystem="ext4" hybridpersistent="true"/>
+        <version>1.42.1</version>
+        <packagemanager>zypper</packagemanager>
+        <locale>en_US</locale>
+        <keytable>us.map.gz</keytable>
+        <timezone>Europe/Moscow</timezone>
+        <hwclock>utc</hwclock>
+        <rpm-excludedocs>true</rpm-excludedocs>
+        <rpm-check-signatures>false</rpm-check-signatures>
+        <bootsplash-theme>openSUSE</bootsplash-theme>
+        <bootloader-theme>openSUSE</bootloader-theme>
+    </preferences>
+    <users group="root">
+        <user password="$1$wYJUgpM5$RXMMeASDc035eX.NbYWFl0" home="/root" name="root"/>
+    </users>
+    <users group="users">
+        <user password="$1$wYJUgpM5$RXMMeASDc035eX.NbYWFl0" home="/home/tux" name="tux"/>
+    </users>
+    <repository type="yast2">
+        <source path="http://download.opensuse.org/distribution/leap/42.1/repo/oss/"/>
+    </repository>
+    <repository type="yast2">
+        <source path="http://download.opensuse.org/distribution/leap/42.1/repo/non-oss/"/>
+    </repository>
+    <repository type="yast2">
+        <source path="http://download.opensuse.org/update/leap/42.1/oss/"/>
+    </repository>
+    <repository type="yast2">
+        <source path="http://download.opensuse.org/update/leap/42.1/non-oss/"/>
+    </repository>
+    <repository type="yast2">
+        <source path="http://download.opensuse.org/source/distribution/leap/42.1/repo/oss/"/>
+    </repository>
+    <packages type="image">
+        <package name="plymouth-branding-openSUSE" bootinclude="true"/>
+        <package name="gfxboot-branding-openSUSE" bootinclude="true" bootdelete="true"/>
+        <package name="grub2-branding-openSUSE" bootinclude="true"/>
+        <package name="kernel-default"/>
+        <package name="ifplugd"/>
+        <package name="iputils"/>
+        <package name="vim"/>
+        <package name="grub2"/>
+        <package name="syslinux"/>
+        <package name="lvm2"/>
+        <package name="plymouth"/>
+        <package name="fontconfig"/>
+        <package name="fonts-config"/>
+        <package name="tar"/>
+        <package name="parted"/>
+        <package name="kiwi"/>
+        <package name="kiwi-templates"/>
+        <package name="kiwi-desc-oemboot"/>
+        <package name="kiwi-desc-isoboot"/>
+        <package name="kiwi-desc-vmxboot"/>
+        <package name="kiwi-desc-netboot"/>
+        <package name="openssh"/>
+        <package name="iproute2"/>
+        <package name="less"/>
+        <package name="bash-completion"/>
+        <package name="dhcp-client"/>
+        <package name="which"/>
+        <package name="x11-tools"/>
+        <package name="xkeyboard-config"/>
+        <package name="xorg-x11"/>
+        <package name="xorg-x11-driver-input"/>
+        <package name="xorg-x11-driver-video"/>
+        <package name="xorg-x11-libX11-ccache"/>
+        <package name="xorg-x11-xauth"/>
+        <package name="xterm"/>
+        <package name="xorg-x11-server"/>
+        <package name="yast2-installation"/>
+        <package name="yast2-qt"/>
+        <package name="yast2-firstboot"/>
+        <package name="yast2-network"/>
+        <package name="yast2-users"/>
+        <package name="kbd"/>
+        <namedCollection name="base"/>
+        <namedCollection name="kde_plasma"/>
+        <namedCollection name="kde_utilities"/>
+    </packages>
+    <packages type="iso">
+        <package name="gfxboot-branding-openSUSE" bootinclude="true" bootdelete="true"/>
+    </packages>
+    <packages type="bootstrap">
+        <package name="udev"/>
+        <package name="filesystem"/>
+        <package name="glibc-locale"/>
+        <package name="cracklib-dict-full"/>
+        <package name="ca-certificates"/>
+        <package name="module-init-tools"/>
+<!--
+        The installation of products in SLE12 requires the SLE12 zypper
+        Thus the following definition only works when building on SLE12
+
+        <product name="openSUSE"/>
+
+        In order to stay compatible we just install the product rpm
+        package. It's required to install the release package in the
+        bootstrap phase in order to avoid the installation of an auto
+        selected dummy-release package which later conflicts with all
+        other release packages
+-->
+        <package name="openSUSE-release"/>
+    </packages>
+    <packages type="delete">
+        <package name="kernel-debug"/>
+    </packages>
+</image>
